@@ -1,13 +1,11 @@
 import {
   Box,
-  Button,
   Card,
   CardContent,
   TextField,
-  InputAdornment,
-  SvgIcon
+  Grid,
+  Button
 } from '@material-ui/core';
-import { Search as SearchIcon } from 'react-feather';
 
 const CustomerListToolbar = (props) => (
   <Box {...props}>
@@ -17,40 +15,35 @@ const CustomerListToolbar = (props) => (
         justifyContent: 'flex-end'
       }}
     >
-      <Button>
-        Import
-      </Button>
-      <Button sx={{ mx: 1 }}>
-        Export
-      </Button>
-      <Button
-        color="primary"
-        variant="contained"
-      >
-        Add customer
-      </Button>
+      <div>{}</div>
     </Box>
     <Box sx={{ mt: 3 }}>
       <Card>
         <CardContent>
           <Box sx={{ maxWidth: 500 }}>
-            <TextField
-              fullWidth
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SvgIcon
-                      fontSize="small"
-                      color="action"
-                    >
-                      <SearchIcon />
-                    </SvgIcon>
-                  </InputAdornment>
-                )
-              }}
-              placeholder="Search customer"
-              variant="outlined"
-            />
+            <Grid container>
+              <Grid item md={4}>
+                <TextField
+                  fullWidth
+                  label="Descrição:"
+                  placeholder="Descrição da tarefa"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item md={4}>
+                <TextField
+                  fullWidth
+                  label="Descrição:"
+                  placeholder="Descrição da tarefa"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item md={2}>
+                <Button variant="contained" color="secondary">
+                  Adicionar
+                </Button>
+              </Grid>
+            </Grid>
           </Box>
         </CardContent>
       </Card>
