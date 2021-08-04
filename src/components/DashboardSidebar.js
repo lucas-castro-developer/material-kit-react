@@ -10,7 +10,9 @@ import {
   List,
   Typography
 } from '@material-ui/core';
-import { BarChart as BarChartIcon, Users as UsersIcon } from 'react-feather';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 import NavItem from './NavItem';
 
 const user = {
@@ -22,13 +24,18 @@ const user = {
 const items = [
   {
     href: '/app/dashboard',
-    icon: BarChartIcon,
+    icon: DashboardIcon,
     title: 'Dashboard'
   },
   {
-    href: '/app/customers',
-    icon: UsersIcon,
-    title: 'Customers'
+    href: '/app/tarefas',
+    icon: FormatListBulletedIcon,
+    title: 'Tarefas'
+  },
+  {
+    href: '/app/login',
+    icon: LockOpenIcon,
+    title: 'Login'
   }
 ];
 
