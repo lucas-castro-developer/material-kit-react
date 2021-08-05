@@ -1,11 +1,33 @@
+// import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Card,
   CardContent,
   TextField,
   Grid,
-  Button
+  Button,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel
 } from '@material-ui/core';
+
+// function styles() {
+//   const useStyles = makeStyles((theme) => ({
+//     root: {
+//       '& > *': {
+//         margin: theme.spacing(1),
+//         width: '25ch'
+//       }
+//     }
+//   }));
+//   return useStyles;
+// }
+
+// function getClasses() {
+//   const classes = styles();
+//   return classes;
+// }
 
 const CustomerListToolbar = (props) => (
   <Box {...props}>
@@ -20,23 +42,28 @@ const CustomerListToolbar = (props) => (
     <Box sx={{ mt: 3 }}>
       <Card>
         <CardContent>
-          <Box sx={{ maxWidth: 500 }}>
+          <Box>
             <Grid container>
               <Grid item md={4}>
-                <TextField
-                  fullWidth
-                  label="Descrição:"
-                  placeholder="Descrição da tarefa"
-                  variant="outlined"
-                />
+                <FormControl fullWidth>
+                  <TextField
+                    fullWidth
+                    label="Descrição:"
+                    placeholder="Descrição da tarefa"
+                    variant="outlined"
+                  />
+                </FormControl>
               </Grid>
               <Grid item md={4}>
-                <TextField
-                  fullWidth
-                  label="Descrição:"
-                  placeholder="Descrição da tarefa"
-                  variant="outlined"
-                />
+                <FormControl fullWidth>
+                  <InputLabel id="label">Categoria: </InputLabel>
+                  <Select labelId="label" id="select" value="">
+                    <MenuItem value="">Selecione...</MenuItem>
+                    <MenuItem value="TRABALHO">Trabalho</MenuItem>
+                    <MenuItem value="ESTUDOS">Estudos</MenuItem>
+                    <MenuItem value="OUTROS">Outros</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item md={2}>
                 <Button variant="contained" color="secondary">
