@@ -10,7 +10,7 @@ import {
   TableRow
 } from '@material-ui/core';
 
-const CustomerListResults = ({ customers, ...rest }) => (
+const tarefaListResults = ({ tarefas, ...rest }) => (
   <Card {...rest}>
     <CardContent>
       <PerfectScrollbar>
@@ -32,8 +32,8 @@ const CustomerListResults = ({ customers, ...rest }) => (
   </Card>
 );
 
-CustomerListResults.propTypes = {
-  customers: PropTypes.array.isRequired
+tarefaListResults.propTypes = {
+  tarefas: PropTypes.array.isRequired
 };
 
-export default CustomerListResults;
+export default tarefaListResults;
