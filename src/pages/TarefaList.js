@@ -1,22 +1,47 @@
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Box, Container } from '@material-ui/core';
 import TarefaListResults from 'src/components/tarefas/TarefaListResults';
 import TarefaListToolbar from 'src/components/tarefas/TarefaListToolbar';
 import axios from 'axios';
 
+const API_URL = 'https://minhastarefas-api.herokuapp.com/tarefas';
+const headers = { 'x-tenant-id': 'fulano@email.com' };
+
 const TarefaList = () => {
-  const salvar = (tarefa) => {
+  const [tarefas, setTarefas] = useState([]);
+
+  const listarTarefas = () => {
     axios
-      .post('https://minhastarefas-api.herokuapp.com/tarefas', tarefa, {
-        headers: { 'x-tenant-id': 'fulano@email.com' }
+      .get(API_URL, {
+        headers
       })
       .then((response) => {
-        console.log(response.data);
+        const listaDeTarefas = response.data;
+        console.log(listaDeTarefas);
+        setTarefas(listaDeTarefas);
       })
       .catch((erro) => {
         console.log(erro);
       });
   };
+
+  const salvar = (tarefa) => {
+    axios
+      .post(API_URL, tarefa, {
+        headers
+      })
+      .then(() => {
+        listarTarefas();
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  };
+
+  useEffect(() => {
+    listarTarefas();
+  }, []);
 
   return (
     <>
@@ -33,7 +58,7 @@ const TarefaList = () => {
         <Container maxWidth={false}>
           <TarefaListToolbar salvar={salvar} />
           <Box sx={{ pt: 3 }}>
-            <TarefaListResults tarefas="" />
+            <TarefaListResults tarefas={tarefas} />
           </Box>
         </Container>
       </Box>
