@@ -1,5 +1,5 @@
-// import { makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Box,
   Card,
@@ -13,30 +13,14 @@ import {
   InputLabel
 } from '@material-ui/core';
 
-// function styles() {
-//   const useStyles = makeStyles((theme) => ({
-//     root: {
-//       '& > *': {
-//         margin: theme.spacing(1),
-//         width: '25ch'
-//       }
-//     }
-//   }));
-//   return useStyles;
-// }
-
-// function getClasses() {
-//   const classes = styles();
-//   return classes;
-// }
-
 const CustomerListToolbar = (props) => {
   const [descricao, setDescricao] = useState('');
   const [categoria, setCategoria] = useState('');
 
   const submit = (event) => {
     event.preventDefault();
-    console.log(`Valores: Descrição - ${descricao} e Categoria - ${categoria}`);
+    const tarefa = { descricao, categoria };
+    props.salvar(tarefa);
   };
 
   return (
@@ -94,6 +78,10 @@ const CustomerListToolbar = (props) => {
       </Box>
     </Box>
   );
+};
+
+CustomerListToolbar.propTypes = {
+  salvar: PropTypes.func
 };
 
 export default CustomerListToolbar;
