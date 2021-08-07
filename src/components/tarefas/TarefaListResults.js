@@ -24,7 +24,16 @@ const tarefaListResults = ({ tarefas, ...rest }) => (
             </TableRow>
           </TableHead>
           <TableBody>
-            <>Teste</>
+            {tarefas.map((tarefa) => {
+              return (
+                <TableRow>
+                  <TableCell>{tarefa.id}</TableCell>
+                  <TableCell>{tarefa.descricao}</TableCell>
+                  <TableCell>{tarefa.categoria}</TableCell>
+                  <TableCell>{tarefa.done ? 'Feito' : 'Pendente'}</TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </PerfectScrollbar>
