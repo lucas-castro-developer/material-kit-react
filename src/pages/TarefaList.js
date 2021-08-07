@@ -39,6 +39,17 @@ const TarefaList = () => {
       });
   };
 
+  const alterarStatus = (id) => {
+    axios
+      .patch(`${API_URL}/${id}`, null, { headers })
+      .then((response) => {
+        console.log(response.status);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  };
+
   useEffect(() => {
     listarTarefas();
   }, []);
@@ -58,7 +69,10 @@ const TarefaList = () => {
         <Container maxWidth={false}>
           <TarefaListToolbar salvar={salvar} />
           <Box sx={{ pt: 3 }}>
-            <TarefaListResults tarefas={tarefas} />
+            <TarefaListResults
+              alterarStatus={alterarStatus}
+              tarefas={tarefas}
+            />
           </Box>
         </Container>
       </Box>

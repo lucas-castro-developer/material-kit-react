@@ -4,7 +4,7 @@
     "es6": true,
     "browser": true
   },
-  "extends": ["airbnb"],
+  "extends": ["airbnb", "plugin:react/recommended"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -20,7 +20,14 @@
     "max-len": "off",
     "no-console": "off",
     "no-plusplus": "off",
-    "jsx-self-close": false,
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^[a-z]"
+      }
+    ],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-props-no-spreading": "off",

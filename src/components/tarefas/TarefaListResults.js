@@ -14,7 +14,7 @@ import {
 import TimerIcon from '@material-ui/icons/Timer';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 
-const tarefaListResults = ({ tarefas, ...rest }) => (
+const tarefaListResults = ({ tarefas, alterarStatus, ...rest }) => (
   <Card {...rest}>
     <CardContent>
       <PerfectScrollbar>
@@ -36,7 +36,13 @@ const tarefaListResults = ({ tarefas, ...rest }) => (
                 <TableCell>{tarefa.categoria}</TableCell>
                 <TableCell>{tarefa.done ? 'Feito' : 'Pendente'}</TableCell>
                 <TableCell>
-                  <IconButton color="primary">
+                  <IconButton
+                    // eslint-disable-next-line no-unused-vars
+                    onClick={(e) => {
+                      alterarStatus(tarefa.id);
+                    }}
+                    color="primary"
+                  >
                     {tarefa.done ? <DoneAllIcon /> : <TimerIcon />}
                   </IconButton>
                 </TableCell>
@@ -50,7 +56,8 @@ const tarefaListResults = ({ tarefas, ...rest }) => (
 );
 
 tarefaListResults.propTypes = {
-  tarefas: PropTypes.array.isRequired
+  tarefas: PropTypes.array.isRequired,
+  alterarStatus: PropTypes.func.isRequired
 };
 
 export default tarefaListResults;
