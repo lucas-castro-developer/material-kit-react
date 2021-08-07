@@ -7,8 +7,12 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow
+  TableRow,
+  IconButton
 } from '@material-ui/core';
+
+import TimerIcon from '@material-ui/icons/Timer';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 
 const tarefaListResults = ({ tarefas, ...rest }) => (
   <Card {...rest}>
@@ -21,6 +25,7 @@ const tarefaListResults = ({ tarefas, ...rest }) => (
               <TableCell>Descrição</TableCell>
               <TableCell>Categoria</TableCell>
               <TableCell>Status</TableCell>
+              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
@@ -30,6 +35,11 @@ const tarefaListResults = ({ tarefas, ...rest }) => (
                 <TableCell>{tarefa.descricao}</TableCell>
                 <TableCell>{tarefa.categoria}</TableCell>
                 <TableCell>{tarefa.done ? 'Feito' : 'Pendente'}</TableCell>
+                <TableCell>
+                  <IconButton color="primary">
+                    {tarefa.done ? <DoneAllIcon /> : <TimerIcon />}
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
