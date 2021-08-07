@@ -18,7 +18,6 @@ const TarefaList = () => {
       })
       .then((response) => {
         const listaDeTarefas = response.data;
-        console.log(listaDeTarefas);
         setTarefas(listaDeTarefas);
       })
       .catch((erro) => {
@@ -31,8 +30,9 @@ const TarefaList = () => {
       .post(API_URL, tarefa, {
         headers
       })
-      .then(() => {
-        listarTarefas();
+      .then((response) => {
+        const novaTarefa = response.data;
+        setTarefas([...tarefas, novaTarefa]);
       })
       .catch((erro) => {
         console.log(erro);

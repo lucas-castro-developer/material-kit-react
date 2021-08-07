@@ -21,6 +21,8 @@ const CustomerListToolbar = (props) => {
     event.preventDefault();
     const tarefa = { descricao, categoria };
     props.salvar(tarefa);
+    setDescricao('');
+    setCategoria('');
   };
 
   return (
