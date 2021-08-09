@@ -13,8 +13,14 @@ import {
 
 import TimerIcon from '@material-ui/icons/Timer';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import DeleteIcon from '@material-ui/icons/Delete';
 
-const tarefaListResults = ({ tarefas, alterarStatus, ...rest }) => (
+const tarefaListResults = ({
+  tarefas,
+  alterarStatus,
+  deleteAction,
+  ...rest
+}) => (
   <Card {...rest}>
     <CardContent>
       <PerfectScrollbar>
@@ -26,11 +32,12 @@ const tarefaListResults = ({ tarefas, alterarStatus, ...rest }) => (
               <TableCell>Categoria</TableCell>
               <TableCell>Status</TableCell>
               <TableCell />
+              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
             {tarefas.map((tarefa) => (
-              <TableRow>
+              <TableRow key={tarefa.key}>
                 <TableCell>{tarefa.id}</TableCell>
                 <TableCell>{tarefa.descricao}</TableCell>
                 <TableCell>{tarefa.categoria}</TableCell>
@@ -46,6 +53,16 @@ const tarefaListResults = ({ tarefas, alterarStatus, ...rest }) => (
                     {tarefa.done ? <DoneAllIcon /> : <TimerIcon />}
                   </IconButton>
                 </TableCell>
+                <TableCell>
+                  <IconButton
+                    // eslint-disable-next-line no-unused-vars
+                    onClick={(e) => {
+                      deleteAction(tarefa.id);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -57,6 +74,7 @@ const tarefaListResults = ({ tarefas, alterarStatus, ...rest }) => (
 
 tarefaListResults.propTypes = {
   tarefas: PropTypes.array.isRequired,
+  deleteAction: PropTypes.func.isRequired,
   alterarStatus: PropTypes.func.isRequired
 };
 

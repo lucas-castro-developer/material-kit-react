@@ -42,13 +42,28 @@ const TarefaList = () => {
   const alterarStatus = (id) => {
     axios
       .patch(`${API_URL}/${id}`, null, { headers })
-      .then((response) => {
+      .then(() => {
+        /* eslint-disable no-param-reassign */
         const lista = [...tarefas];
         lista.forEach((tarefa) => {
           if (tarefa.id === id) {
             tarefa.done = true;
           }
         });
+        setTarefas(lista);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  };
+
+  const deletar = (id) => {
+    axios
+      .delete(`${API_URL}/${id}`, {
+        headers
+      })
+      .then(() => {
+        const lista = tarefas.filter((tarefa) => tarefa.id !== id);
         setTarefas(lista);
       })
       .catch((erro) => {
@@ -76,6 +91,7 @@ const TarefaList = () => {
           <TarefaListToolbar salvar={salvar} />
           <Box sx={{ pt: 3 }}>
             <TarefaListResults
+              deleteAction={deletar}
               alterarStatus={alterarStatus}
               tarefas={tarefas}
             />

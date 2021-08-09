@@ -26,6 +26,7 @@
         "varsIgnorePattern": "^[a-z]"
       }
     ],
+    "no-param-reassign": 0,
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/forbid-prop-types": "off",
