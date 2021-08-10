@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { Box, Container } from '@material-ui/core';
 import TarefaListResults from 'src/components/tarefas/TarefaListResults';
 import TarefaListToolbar from 'src/components/tarefas/TarefaListToolbar';
 import axios from 'axios';
+import {
+  Box,
+  Container,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from '@material-ui/core';
 
 const API_URL = 'https://minhastarefas-api.herokuapp.com/tarefas';
 const headers = { 'x-tenant-id': 'fulano@email.com' };
 
 const TarefaList = () => {
   const [tarefas, setTarefas] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [mensagem, setMensagem] = useState('');
 
   const listarTarefas = () => {
     axios
@@ -21,7 +31,8 @@ const TarefaList = () => {
         setTarefas(listaDeTarefas);
       })
       .catch((erro) => {
-        console.log(erro);
+        setMensagem('Ocorreu um erro!', erro);
+        setOpenDialog(true);
       });
   };
 
@@ -33,9 +44,12 @@ const TarefaList = () => {
       .then((response) => {
         const novaTarefa = response.data;
         setTarefas([...tarefas, novaTarefa]);
+        setMensagem('Item adicionado com sucesso!');
+        setOpenDialog(true);
       })
       .catch((erro) => {
-        console.log(erro);
+        setMensagem('Ocorreu um erro!', erro);
+        setOpenDialog(true);
       });
   };
 
@@ -51,9 +65,12 @@ const TarefaList = () => {
           }
         });
         setTarefas(lista);
+        setMensagem('Item atualizado com sucesso!');
+        setOpenDialog(true);
       })
       .catch((erro) => {
-        console.log(erro);
+        setMensagem('Ocorreu um erro!', erro);
+        setOpenDialog(true);
       });
   };
 
@@ -65,9 +82,12 @@ const TarefaList = () => {
       .then(() => {
         const lista = tarefas.filter((tarefa) => tarefa.id !== id);
         setTarefas(lista);
+        setMensagem('Item removido com sucesso!');
+        setOpenDialog(true);
       })
       .catch((erro) => {
-        console.log(erro);
+        setMensagem('Ocorreu um erro!', erro);
+        setOpenDialog(true);
       });
   };
 
@@ -96,6 +116,26 @@ const TarefaList = () => {
               tarefas={tarefas}
             />
           </Box>
+          <Dialog
+            open={openDialog}
+            onClose={
+              // eslint-disable-next-line no-unused-vars
+              (e) => setOpenDialog(false)
+            }
+          >
+            <DialogTitle>Atenção</DialogTitle>
+            <DialogContent>{mensagem}</DialogContent>
+            <DialogActions>
+              <Button
+                onClick={
+                  // eslint-disable-next-line no-unused-vars
+                  (e) => setOpenDialog(false)
+                }
+              >
+                Fechar
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Container>
       </Box>
     </>
