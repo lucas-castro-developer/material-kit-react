@@ -1,4 +1,4 @@
-import { Link as useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import * as Yup from 'yup';
@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 
 const Login = () => {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
 
   return (
