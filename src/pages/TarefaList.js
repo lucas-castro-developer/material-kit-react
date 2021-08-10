@@ -14,7 +14,6 @@ import {
 } from '@material-ui/core';
 
 const API_URL = 'https://minhastarefas-api.herokuapp.com/tarefas';
-const headers = { 'x-tenant-id': 'fulano@email.com' };
 
 const TarefaList = () => {
   const [tarefas, setTarefas] = useState([]);
@@ -24,7 +23,7 @@ const TarefaList = () => {
   const listarTarefas = () => {
     axios
       .get(API_URL, {
-        headers
+        headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
       })
       .then((response) => {
         const listaDeTarefas = response.data;
@@ -39,7 +38,7 @@ const TarefaList = () => {
   const salvar = (tarefa) => {
     axios
       .post(API_URL, tarefa, {
-        headers
+        headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
       })
       .then((response) => {
         const novaTarefa = response.data;
@@ -55,7 +54,9 @@ const TarefaList = () => {
 
   const alterarStatus = (id) => {
     axios
-      .patch(`${API_URL}/${id}`, null, { headers })
+      .patch(`${API_URL}/${id}`, null, {
+        headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
+      })
       .then(() => {
         /* eslint-disable no-param-reassign */
         const lista = [...tarefas];
@@ -77,7 +78,7 @@ const TarefaList = () => {
   const deletar = (id) => {
     axios
       .delete(`${API_URL}/${id}`, {
-        headers
+        headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
       })
       .then(() => {
         const lista = tarefas.filter((tarefa) => tarefa.id !== id);

@@ -43,6 +43,7 @@ const Login = () => {
               password: Yup.string().max(255).required('Password is required')
             })}
             onSubmit={() => {
+              localStorage.setItem('email_usuario_logado', email);
               navigate('/app/dashboard', { replace: true });
             }}
           >
