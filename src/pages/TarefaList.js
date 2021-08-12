@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import TarefaListResults from 'src/components/tarefas/TarefaListResults';
 import TarefaListToolbar from 'src/components/tarefas/TarefaListToolbar';
 import axios from 'axios';
@@ -12,28 +15,14 @@ import {
   DialogContent,
   DialogTitle
 } from '@material-ui/core';
+import { listar } from '../store/tarefasReducer';
 
 const API_URL = 'https://minhastarefas-api.herokuapp.com/tarefas';
 
-const TarefaList = () => {
+const TarefaList = ({ tarefasResult, list }) => {
   const [tarefas, setTarefas] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [mensagem, setMensagem] = useState('');
-
-  const listarTarefas = () => {
-    axios
-      .get(API_URL, {
-        headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
-      })
-      .then((response) => {
-        const listaDeTarefas = response.data;
-        setTarefas(listaDeTarefas);
-      })
-      .catch((erro) => {
-        setMensagem('Ocorreu um erro!', erro);
-        setOpenDialog(true);
-      });
-  };
 
   const salvar = (tarefa) => {
     axios
@@ -93,7 +82,7 @@ const TarefaList = () => {
   };
 
   useEffect(() => {
-    listarTarefas();
+    list();
   }, []);
 
   return (
@@ -114,7 +103,7 @@ const TarefaList = () => {
             <TarefaListResults
               deleteAction={deletar}
               alterarStatus={alterarStatus}
-              tarefas={tarefas}
+              tarefas={tarefasResult}
             />
           </Box>
           <Dialog
@@ -143,4 +132,15 @@ const TarefaList = () => {
   );
 };
 
-export default TarefaList;
+TarefaList.propTypes = {
+  list: PropTypes.func,
+  tarefasResult: PropTypes.array
+};
+
+const mapStateToProps = (state) => ({
+  tarefasResult: state.tarefas.tarefas
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({ list: listar }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(TarefaList);
