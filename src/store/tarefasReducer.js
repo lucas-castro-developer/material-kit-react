@@ -16,12 +16,22 @@ const INITIAL_STATE = {
 
 const tarefaReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ACTIONS.LISTAR:
+    case ACTIONS.LISTAR: {
       return { ...state, tarefas: action.tarefas };
-    case ACTIONS.ADD:
+    }
+    case ACTIONS.ADD: {
       return { ...state, tarefas: [...state.tarefas, action.tarefa] };
-    default:
+    }
+    case ACTIONS.REMOVER: {
+      const { id } = action.id;
+      const tarefaAtualizada = state.tarefas.filter(
+        (tarefa) => tarefa.id !== id
+      );
+      return { ...state, tarefas: tarefaAtualizada };
+    }
+    default: {
       return state;
+    }
   }
 };
 
@@ -52,6 +62,24 @@ export function salvar(tarefa) {
           tarefa: response.data
         });
       });
+  };
+}
+
+export function deletar(id) {
+  return (dispatch) => {
+    http
+      .delete(`/tarefas/${id}`, {
+        headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
+      })
+      .then(
+        // eslint-disable-next-line no-unused-vars
+        (response) => {
+          dispatch({
+            type: ACTIONS.REMOVER,
+            id
+          });
+        }
+      );
   };
 }
 
