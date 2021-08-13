@@ -15,31 +15,14 @@ import {
   DialogContent,
   DialogTitle
 } from '@material-ui/core';
-import { listar } from '../store/tarefasReducer';
+import { listar, salvar } from '../store/tarefasReducer';
 
 const API_URL = 'https://minhastarefas-api.herokuapp.com/tarefas';
 
-const TarefaList = ({ tarefasResult, list }) => {
+const TarefaList = ({ tarefasResult, list, save }) => {
   const [tarefas, setTarefas] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [mensagem, setMensagem] = useState('');
-
-  const salvar = (tarefa) => {
-    axios
-      .post(API_URL, tarefa, {
-        headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
-      })
-      .then((response) => {
-        const novaTarefa = response.data;
-        setTarefas([...tarefas, novaTarefa]);
-        setMensagem('Item adicionado com sucesso!');
-        setOpenDialog(true);
-      })
-      .catch((erro) => {
-        setMensagem('Ocorreu um erro!', erro);
-        setOpenDialog(true);
-      });
-  };
 
   const alterarStatus = (id) => {
     axios
@@ -98,7 +81,7 @@ const TarefaList = ({ tarefasResult, list }) => {
         }}
       >
         <Container maxWidth={false}>
-          <TarefaListToolbar salvar={salvar} />
+          <TarefaListToolbar salvar={save} />
           <Box sx={{ pt: 3 }}>
             <TarefaListResults
               deleteAction={deletar}
@@ -134,6 +117,7 @@ const TarefaList = ({ tarefasResult, list }) => {
 
 TarefaList.propTypes = {
   list: PropTypes.func,
+  save: PropTypes.func,
   tarefasResult: PropTypes.array
 };
 
@@ -141,6 +125,6 @@ const mapStateToProps = (state) => ({
   tarefasResult: state.tarefas.tarefas
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ list: listar }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ list: listar, save: salvar }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TarefaList);
