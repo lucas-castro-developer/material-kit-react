@@ -1,108 +1,112 @@
-## [Material Kit - React](https://material-kit-react.devias.io/) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?text=%F0%9F%9A%A8Devias%20Freebie%20Alert%20-%20An%20awesome%20ready-to-use%20register%20page%20made%20with%20%23material%20%23react%0D%0Ahttps%3A%2F%2Fdevias.io%20%23createreactapp%20%23devias%20%23material%20%23freebie%20%40devias-io)
+# App em React - Todo App
 
-![license](https://img.shields.io/badge/license-MIT-blue.svg)
+<br />
+<p align="center">
+  <a href="#">
+    <img src="images/#">
+  </a>
 
-[![Material Kit - React](https://s3.eu-west-2.amazonaws.com/devias/products/react-material-dashboard/react-material-free-xl.jpg)](https://react-material-dashboard.devias.io/)
+  <h3 align="center">Todo App</h3>
 
-> Free React Admin Dashboard made with [Material UI's](https://material-ui.com/?ref=devias-io) components, [React](https://reactjs.org/?ref=devias-io) and of course [create-react-app](https://facebook.github.io/create-react-app/?ref=devias-io) to boost your app development process! We'll launch a pro version soon, so if you are interested subscribe to our personal emailing list on [https://devias.io/](https://devias.io/)
+  <p align="center">
+    Sua aplicação de tarefas que dá gosto só de ver!
+    <br />
+    <a href="https://github.com/lucas-castro-developer/material-kit-react"><strong>Explore as documentações »</strong></a>
+    <br />
+    <br />
+  </p>
+</p>
 
-## Upgrade to PRO Version
+<details open="open">
+  <summary>Conteúdos</summary>
+  <ol>
+    <li>
+      <a href="#sobre-o-projeto">Sobre o projeto</a>
+      <ul>
+        <li><a href="#construído-com">Construído com</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#iniciando">Iniciando</a>
+      <ul>
+        <li><a href="#pré-requisitos">Pré-requisitos</a></li>
+        <li><a href="#instalação">Instalação</a></li>
+      </ul>
+    </li>
+    <li><a href="#Contribuição">Contribuição</a></li>
+    <li><a href="#Licença">Licença</a></li>
+    <li><a href="#Contato">Contato</a></li>
+  </ol>
+</details>
 
-We also have a pro version of this product which bundles even more pages and components if you want to save more time and design efforts :)
+## Sobre o projeto
 
+Aplicação de lista tarefas onde o usuário pode se organizar do jeito que quiser.
 
-| Free Version (this one)              | [Material Kit Pro - React](https://material-ui.com/store/items/devias-kit-pro/) |
-| ------------------------ | :----------------------------------------------------------- |
-| **7** Demo Pages         | **32** demo pages
-| -                        | ✔ Dark & light mode
-| -                        | ✔ Authentication with *Amplify**, **Auth0** and **Firebase**  
-| -                        | ✔ TypeScript version                                                                                   
-| -                        | ✔ Design files (sketch & figma) - for extended license       
-| -                        | ✔ Complete users flows                                       
+O cliente, após fazer o login, pode cadastrar, editar  status e/ou excluir a tarefa já criada.
 
-## Demo
+As informações são salvas em uma API externa disponibilizada pelo curso onde foi apresentado o projeto, e as informações de login são salvas a partir do localStorage do dispositivo local do usuário.
 
-- [Dashboard Page](https://material-kit-react.devias.io/app/dashboard)
-- [Users Page](https://material-kit-react.devias.io/app/customers)
-- [Products Page](https://material-kit-react.devias.io/app/products)
-- [Register Page](https://material-kit-react.devias.io/register)
-- [Login Page](https://material-kit-react.devias.io/login)
-- [Account Page](https://material-kit-react.devias.io/app/account)
-- [Settings Page](https://material-kit-react.devias.io/app/settings)
+Abaixo, segue imagens do layout construído em dispositivos  `mobile` e `desktop`:
 
+**Mobile**
 
-## Quick start
+<img src="images/IMAGEM_APLICACAO_MOBILE">
 
-- [Download from Github](https://github.com/devias-io/material-kit-react/archive/master.zip) or [Download from Devias](https://devias.io/products/material-kit-react) or clone the repo: `git clone https://github.com/devias-io/material-kit-react.git`
+**Desktop**
 
-- Make sure your NodeJS and npm versions are up to date for `React 17`
+<img src="images/IMAGEM_APLICACAO_DESKTOP">
 
-- Install dependencies: `npm install` or `yarn`
+### Construído com
 
-- Start the server: `npm run start` or `yarn start`
+Este projeto foi construído com o auxílio das seguintes ferramentas:
+* [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
+* [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
+* [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+* [ReactJS](https://pt-br.reactjs.org/)
+* [Axios](https://github.com/axios/axios)
+* [Material-UI](https://material-ui.com/pt/)
 
-- Views are on: `localhost:3000`
+<!-- GETTING STARTED -->
+## Iniciando
 
-## 🖌 Design Files
+Para começar a manipular o projeto, siga os passos abaixo:
 
-👉[Download Sketch file](https://s3.eu-west-2.amazonaws.com/devias/products/react-material-dashboard/react-material-dashboard-free.sketch)
+### Instalação
 
-👉[Download Figma file](https://devias.s3.eu-west-2.amazonaws.com/products/react-material-dashboard/react-material-dashboard-free.fig)
+1. Clone o repositório
+ ```sh
+ git clone https://github.com/lucas-castro-developer/material-kit-react.git
+ ```
 
-## File Structure
+2. Na raiz do repositório, instale as dependências
+ ```sh
+ npm install
+ ```
+ 
+3. Ainda na raiz do repositório, rode o comando abaixo para executar o projeto
+ ```sh
+ npm start
+ ```
 
-Within the download you'll find the following directories and files:
+5. Pronto. Seu projeto estará funcionando para testes.
 
-```
-material-react-dashboard
+## Contribuição
 
-├── .eslintrc
-├── .gitignore
-├── .prettierrc
-├── CHANGELOG.md
-├── jsconfig.json
-├── LICENSE.md
-├── package.json
-├── README.md
-├── public
-├── docs
-└── src
-	├── assets
-	├── common
-	├── components
-	├── helpers
-	├── icons
-	├── layouts
-	├── theme
-	├── views
-	│	├── Account
-	│	├── Dashboard
-	│	├── Icons
-	│	├── NotFound
-	│	├── ProductList
-	│	├── Settings
-	│	├── SignIn
-	│	├── SignUp
-	│	├── Typography
-	│	└── UserList
-	├── App.jsx
-	├── index.jsx
-	└── Routes.jsx
-```
+Quer contribuir com este projeto? Então siga os passos abaixo:
 
-## Resources
+1. Realize o fork do projeto
+2. Crie sua branch (`git checkout -b feature/AmazingFeature`)
+3. Faça o commit das suas modificações/criações (`git commit -m 'Add some AmazingFeature'`)
+4. Publique a branch (`git push origin feature/AmazingFeature`)
+5. Abra uma Pull Request
 
-- More freebies like this one: <https://devias.io>
+## Licença
 
-## Reporting Issues:
+Este projeto não utiliza nenhum tipo de licença.
 
-- [Github Issues Page](https://github.com/devias-io/react-material-dashboard/issues?ref=devias-io)
+## Contato
 
-## License
+Lucas dos Santos Castro - [LinkedIn](https://www.linkedin.com/in/lucas-santos-castro-developer/) - lucascastrodeveloper@gmail.com
 
-- Licensed under MIT (https://github.com/devias-io/react-material-dashboard/blob/master/LICENSE.md)
-
-## Contact Us
-
-- Email Us: support@deviasio.zendesk.com
-- [Follow us on Instagram](https://www.instagram.com/deviasio/)
+Project Link: [https://github.com/lucas-castro-developer/material-kit-react](https://github.com/lucas-castro-developer/material-kit-react)
