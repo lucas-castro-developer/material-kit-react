@@ -2,9 +2,6 @@
 
 <br />
 <p align="center">
-  <a href="#">
-    <img src="images/#">
-  </a>
 
   <h3 align="center">Todo App</h3>
 
@@ -49,13 +46,9 @@ As informações são salvas em uma API externa disponibilizada pelo curso onde 
 
 Abaixo, segue imagens do layout construído em dispositivos  `mobile` e `desktop`:
 
-**Mobile**
+<img src="images/desk-1.png">
 
-<img src="images/IMAGEM_APLICACAO_MOBILE">
-
-**Desktop**
-
-<img src="images/IMAGEM_APLICACAO_DESKTOP">
+<img src="images/desk-2.png">
 
 ### Construído com
 
