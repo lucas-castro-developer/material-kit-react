@@ -68,10 +68,13 @@ export function salvar(tarefa) {
         headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
       })
       .then((response) => {
-        dispatch({
-          type: ACTIONS.ADD,
-          tarefa: response.data
-        });
+        dispatch([
+          {
+            type: ACTIONS.ADD,
+            tarefa: response.data
+          },
+          mostrarMensagem('Tarefa salva com sucesso!')
+        ]);
       });
   };
 }
@@ -85,10 +88,13 @@ export function deletar(paramId) {
       .then(
         // eslint-disable-next-line no-unused-vars
         (response) => {
-          dispatch({
-            type: ACTIONS.REMOVER,
-            id: paramId
-          });
+          dispatch([
+            {
+              type: ACTIONS.REMOVER,
+              id: paramId
+            },
+            mostrarMensagem('Tarefa deletada com sucesso!')
+          ]);
         }
       );
   };
@@ -103,10 +109,10 @@ export function alterarStatus(paramId) {
       .then(
         // eslint-disable-next-line no-unused-vars
         (response) => {
-          dispatch({
+          dispatch([{
             type: ACTIONS.UPDATE_STATUS,
             id: paramId
-          });
+          }, mostrarMensagem('Tarefa atualizada com sucesso!')]);
         }
       );
   };
