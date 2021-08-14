@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TarefaListResults from 'src/components/tarefas/TarefaListResults';
 import TarefaListToolbar from 'src/components/tarefas/TarefaListToolbar';
-import axios from 'axios';
 import {
   Box,
   Container,
@@ -21,18 +20,18 @@ import {
   deletar,
   alterarStatus
 } from '../store/tarefasReducer';
+import { esconderMensagem } from '../store/mensagensReducer';
 
 const TarefaList = ({
   list,
   save,
   deleteTask,
   updateStatus,
-  tarefasResult
+  hideMessage,
+  tarefasResult,
+  mensagemContent,
+  mensagemTrigger
 }) => {
-  const [tarefas, setTarefas] = useState([]);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [mensagem, setMensagem] = useState('');
-
   useEffect(() => {
     list();
   }, []);
@@ -59,20 +58,14 @@ const TarefaList = ({
             />
           </Box>
           <Dialog
-            open={openDialog}
-            onClose={
-              // eslint-disable-next-line no-unused-vars
-              (e) => setOpenDialog(false)
-            }
+            open={mensagemTrigger}
+            onClose={hideMessage}
           >
             <DialogTitle>Atenção</DialogTitle>
-            <DialogContent>{mensagem}</DialogContent>
+            <DialogContent>{mensagemContent}</DialogContent>
             <DialogActions>
               <Button
-                onClick={
-                  // eslint-disable-next-line no-unused-vars
-                  (e) => setOpenDialog(false)
-                }
+                onClick={hideMessage}
               >
                 Fechar
               </Button>
@@ -89,11 +82,16 @@ TarefaList.propTypes = {
   save: PropTypes.func,
   deleteTask: PropTypes.func,
   updateStatus: PropTypes.func,
-  tarefasResult: PropTypes.array
+  hideMessage: PropTypes.func,
+  tarefasResult: PropTypes.array,
+  mensagemContent: PropTypes.string,
+  mensagemTrigger: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
-  tarefasResult: state.tarefas.tarefas
+  tarefasResult: state.tarefas.tarefas,
+  mensagemContent: state.mensagens.mensagem,
+  mensagemTrigger: state.mensagens.mostrarMensagem
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
@@ -101,7 +99,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
     list: listar,
     save: salvar,
     deleteTask: deletar,
-    updateStatus: alterarStatus
+    updateStatus: alterarStatus,
+    hideMessage: esconderMensagem
   }, dispatch
 );
 
