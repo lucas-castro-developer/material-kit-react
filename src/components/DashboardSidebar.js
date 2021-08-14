@@ -10,7 +10,6 @@ import {
   List,
   Typography
 } from '@material-ui/core';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import NavItem from './NavItem';
@@ -22,11 +21,6 @@ const user = {
 };
 
 const items = [
-  {
-    href: '/app/dashboard',
-    icon: DashboardIcon,
-    title: 'Dashboard'
-  },
   {
     href: '/app/tarefas',
     icon: FormatListBulletedIcon,
