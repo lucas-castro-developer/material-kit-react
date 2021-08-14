@@ -7,7 +7,8 @@ const http = axios.create({
 const ACTIONS = {
   LISTAR: 'TAREFAS_LISTAR',
   ADD: 'TAREFAS_ADD',
-  REMOVER: 'TAREFAS_REMOVE'
+  REMOVER: 'TAREFAS_REMOVE',
+  UPDATE_STATUS: 'TAREFAS_UPDATE_STATUS'
 };
 
 const INITIAL_STATE = {
@@ -28,6 +29,15 @@ const tarefaReducer = (state = INITIAL_STATE, action) => {
         (tarefa) => tarefa.id !== id
       );
       return { ...state, tarefas: tarefaAtualizada };
+    }
+    case ACTIONS.UPDATE_STATUS: {
+      const lista = [...state.tarefas];
+      lista.forEach((tarefa) => {
+        if (tarefa.id === action.id) {
+          tarefa.done = true;
+        }
+      });
+      return { ...state, tarefas: lista };
     }
     default: {
       return state;
@@ -65,10 +75,10 @@ export function salvar(tarefa) {
   };
 }
 
-export function deletar(id) {
+export function deletar(paramId) {
   return (dispatch) => {
     http
-      .delete(`/tarefas/${id}`, {
+      .delete(`/tarefas/${paramId}`, {
         headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
       })
       .then(
@@ -76,7 +86,25 @@ export function deletar(id) {
         (response) => {
           dispatch({
             type: ACTIONS.REMOVER,
-            id
+            id: paramId
+          });
+        }
+      );
+  };
+}
+
+export function alterarStatus(paramId) {
+  return (dispatch) => {
+    http
+      .patch(`tarefas/${paramId}`, null, {
+        headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
+      })
+      .then(
+        // eslint-disable-next-line no-unused-vars
+        (response) => {
+          dispatch({
+            type: ACTIONS.UPDATE_STATUS,
+            id: paramId
           });
         }
       );

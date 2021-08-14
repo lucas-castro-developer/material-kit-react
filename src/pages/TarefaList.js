@@ -15,42 +15,23 @@ import {
   DialogContent,
   DialogTitle
 } from '@material-ui/core';
-import { listar, salvar, deletar } from '../store/tarefasReducer';
-
-const API_URL = 'https://minhastarefas-api.herokuapp.com/tarefas';
+import {
+  listar,
+  salvar,
+  deletar,
+  alterarStatus
+} from '../store/tarefasReducer';
 
 const TarefaList = ({
   list,
   save,
-  tarefasResult,
-  deleteTask
+  deleteTask,
+  updateStatus,
+  tarefasResult
 }) => {
   const [tarefas, setTarefas] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [mensagem, setMensagem] = useState('');
-
-  const alterarStatus = (id) => {
-    axios
-      .patch(`${API_URL}/${id}`, null, {
-        headers: { 'x-tenant-id': localStorage.getItem('email_usuario_logado') }
-      })
-      .then(() => {
-        /* eslint-disable no-param-reassign */
-        const lista = [...tarefas];
-        lista.forEach((tarefa) => {
-          if (tarefa.id === id) {
-            tarefa.done = true;
-          }
-        });
-        setTarefas(lista);
-        setMensagem('Item atualizado com sucesso!');
-        setOpenDialog(true);
-      })
-      .catch((erro) => {
-        setMensagem('Ocorreu um erro!', erro);
-        setOpenDialog(true);
-      });
-  };
 
   useEffect(() => {
     list();
@@ -73,7 +54,7 @@ const TarefaList = ({
           <Box sx={{ pt: 3 }}>
             <TarefaListResults
               deleteAction={deleteTask}
-              alterarStatus={alterarStatus}
+              alterarStatus={updateStatus}
               tarefas={tarefasResult}
             />
           </Box>
@@ -107,6 +88,7 @@ TarefaList.propTypes = {
   list: PropTypes.func,
   save: PropTypes.func,
   deleteTask: PropTypes.func,
+  updateStatus: PropTypes.func,
   tarefasResult: PropTypes.array
 };
 
@@ -114,6 +96,13 @@ const mapStateToProps = (state) => ({
   tarefasResult: state.tarefas.tarefas
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ list: listar, save: salvar, deleteTask: deletar }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    list: listar,
+    save: salvar,
+    deleteTask: deletar,
+    updateStatus: alterarStatus
+  }, dispatch
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TarefaList);
