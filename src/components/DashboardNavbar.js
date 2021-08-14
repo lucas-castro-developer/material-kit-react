@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   AppBar,
@@ -14,9 +15,8 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import Logo from './Logo';
 
-const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
+const DashboardNavbar = ({ onMobileNavOpen, notificacoes, ...rest }) => {
   const navigate = useNavigate();
-  const [notifications] = useState([]);
 
   const logout = () => {
     localStorage.removeItem('email_logado_usuario');
@@ -32,11 +32,7 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
         <Box sx={{ flexGrow: 1 }} />
         <Hidden lgDown>
           <IconButton color="inherit">
-            <Badge
-              badgeContent={notifications.length}
-              color="primary"
-              variant="dot"
-            >
+            <Badge badgeContent={notificacoes} color="primary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
@@ -55,7 +51,12 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
 };
 
 DashboardNavbar.propTypes = {
+  notificacoes: PropTypes.number,
   onMobileNavOpen: PropTypes.func
 };
 
-export default DashboardNavbar;
+const mapStateToProps = (state) => ({
+  notificacoes: state.tarefas.quantidade
+});
+
+export default connect(mapStateToProps)(DashboardNavbar);

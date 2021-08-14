@@ -13,23 +13,27 @@ const ACTIONS = {
 };
 
 const INITIAL_STATE = {
-  tarefas: []
+  tarefas: [],
+  quantidade: 0
 };
 
 const tarefaReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ACTIONS.LISTAR: {
-      return { ...state, tarefas: action.tarefas };
+      return {
+        ...state,
+        tarefas: action.tarefas,
+        quantidade: action.tarefas.length
+      };
     }
     case ACTIONS.ADD: {
-      return { ...state, tarefas: [...state.tarefas, action.tarefa] };
+      const lista = [...state.tarefas, action.tarefa];
+      return { ...state, tarefas: lista, quantidade: lista.length };
     }
     case ACTIONS.REMOVER: {
       const { id } = action.id;
-      const tarefaAtualizada = state.tarefas.filter(
-        (tarefa) => tarefa.id !== id
-      );
-      return { ...state, tarefas: tarefaAtualizada };
+      const lista = state.tarefas.filter((tarefa) => tarefa.id !== id);
+      return { ...state, tarefas: lista, quantidade: lista.length };
     }
     case ACTIONS.UPDATE_STATUS: {
       const lista = [...state.tarefas];
@@ -109,10 +113,13 @@ export function alterarStatus(paramId) {
       .then(
         // eslint-disable-next-line no-unused-vars
         (response) => {
-          dispatch([{
-            type: ACTIONS.UPDATE_STATUS,
-            id: paramId
-          }, mostrarMensagem('Tarefa atualizada com sucesso!')]);
+          dispatch([
+            {
+              type: ACTIONS.UPDATE_STATUS,
+              id: paramId
+            },
+            mostrarMensagem('Tarefa atualizada com sucesso!')
+          ]);
         }
       );
   };
