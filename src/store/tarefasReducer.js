@@ -27,22 +27,31 @@ const tarefaReducer = (state = INITIAL_STATE, action) => {
       };
     }
     case ACTIONS.ADD: {
-      const lista = [...state.tarefas, action.tarefa];
-      return { ...state, tarefas: lista, quantidade: lista.length };
+      const listaAtualizadaAdd = [...state.tarefas, action.tarefa];
+      return {
+        ...state,
+        tarefas: listaAtualizadaAdd,
+        quantidade: listaAtualizadaAdd.length
+      };
     }
     case ACTIONS.REMOVER: {
-      const { id } = action.id;
-      const lista = state.tarefas.filter((tarefa) => tarefa.id !== id);
-      return { ...state, tarefas: lista, quantidade: lista.length };
+      const listaAtualizadaRemover = state.tarefas.filter(
+        (tarefa) => tarefa.id !== action.id
+      );
+      return {
+        ...state,
+        tarefas: listaAtualizadaRemover,
+        quantidade: listaAtualizadaRemover.length
+      };
     }
     case ACTIONS.UPDATE_STATUS: {
-      const lista = [...state.tarefas];
-      lista.forEach((tarefa) => {
+      const listaAtualizadaStatus = [...state.tarefas];
+      listaAtualizadaStatus.forEach((tarefa) => {
         if (tarefa.id === action.id) {
           tarefa.done = true;
         }
       });
-      return { ...state, tarefas: lista };
+      return { ...state, tarefas: listaAtualizadaStatus };
     }
     default: {
       return state;
